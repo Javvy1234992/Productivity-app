@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>StudentFlow - Productivity App</title>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <!-- Top Navigation Bar -->
+  <header class="top-nav">
+    <nav class="nav-left">
+      <button class="nav-btn active" data-view="home" aria-label="Home">
+        <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+          <polyline points="9 22 9 12 15 12 15 22"/>
+        </svg>
+        <span>Home</span>
+      </button>
+      <button class="nav-btn" data-view="todo" aria-label="To-do">
+        <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M9 11l3 3L22 4"/>
+          <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/>
+        </svg>
+        <span>To-do</span>
+      </button>
+      <button class="nav-btn" data-view="calendar" aria-label="Calendar">
+        <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+          <line x1="16" y1="2" x2="16" y2="6"/>
+          <line x1="8" y1="2" x2="8" y2="6"/>
+          <line x1="3" y1="10" x2="21" y2="10"/>
+        </svg>
+        <span>Calendar</span>
+      </button>
+      <button class="nav-btn" data-view="notes" aria-label="Notes">
+        <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+          <polyline points="14 2 14 8 20 8"/>
+          <line x1="16" y1="13" x2="8" y2="13"/>
+          <line x1="16" y1="17" x2="8" y2="17"/>
+          <polyline points="10 9 9 9 8 9"/>
+        </svg>
+        <span>Notes</span>
+      </button>
+      <button class="nav-btn" data-view="board" aria-label="Board">
+        <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M12 19l7-7 3 3-7 7-3-3z"/>
+          <path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"/>
+          <path d="M2 2l7.586 7.586"/>
+          <circle cx="11" cy="11" r="2"/>
+        </svg>
+        <span>Board</span>
+      </button>
+    </nav>
+    <div class="nav-right">
+      <button class="hamburger-btn" aria-label="Menu" id="hamburgerBtn">
+        <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <line x1="3" y1="6" x2="21" y2="6"/>
+          <line x1="3" y1="12" x2="21" y2="12"/>
+          <line x1="3" y1="18" x2="21" y2="18"/>
+        </svg>
+      </button>
+      <div class="dropdown-menu" id="dropdownMenu">
+        <button class="dropdown-item" id="deleteDataBtn">
+          <svg class="dropdown-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polyline points="3 6 5 6 21 6"/>
+            <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/>
+          </svg>
+          Delete data
+        </button>
+        <button class="dropdown-item" id="customiseBtn">
+          <svg class="dropdown-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="3"/>
+            <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/>
+          </svg>
+          Customisation
+        </button>
+        <button class="dropdown-item" id="tutorialBtn">
+          <svg class="dropdown-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="10"/>
+            <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/>
+            <line x1="12" y1="17" x2="12.01" y2="17"/>
+          </svg>
+          Tutorial
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content Area -->
+  <main class="main-content">
+    <!-- Home View -->
+    <section id="home-view" class="view active">
+      <div class="home-container">
+        <h1 class="welcome-title">Welcome!</h1>
+        <div class="summary-card">
+          <div class="summary-item">
+            <span class="summary-label">Pending tasks:</span>
+            <span class="summary-value" id="pendingTasksCount">0</span>
+          </div>
+          <div class="summary-item">
+            <span class="summary-label">Notes created:</span>
+            <span class="summary-value" id="notesCount">0</span>
+          </div>
+          <div class="summary-item">
+            <span class="summary-label">Last board opened:</span>
+            <span class="summary-value" id="lastBoardName">None yet</span>
+          </div>
+        </div>
+        <div class="home-actions">
+          <button class="primary-btn" id="homeNewTaskBtn">
+            <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <line x1="12" y1="5" x2="12" y2="19"/>
+              <line x1="5" y1="12" x2="19" y2="12"/>
+            </svg>
+            New Task
+          </button>
+          <button class="primary-btn" id="homeNewNoteBtn">
+            <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <line x1="12" y1="5" x2="12" y2="19"/>
+              <line x1="5" y1="12" x2="19" y2="12"/>
+            </svg>
+            New Note
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- To-do View -->
+    <section id="todo-view" class="view">
+      <div class="todo-toolbar">
+        <span class="toolbar-label">Category filter:</span>
+        <div class="filter-buttons">
+          <button class="filter-btn active" data-filter="all">All</button>
+          <button class="filter-btn" data-filter="School">School</button>
+          <button class="filter-btn" data-filter="Personal">Personal</button>
+        </div>
+      </div>
+      <div class="todo-list" id="todoList">
+        <!-- Tasks will be rendered here -->
+      </div>
+      <button class="add-row-btn" id="addTaskBtn">
+        <svg class="add-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <line x1="12" y1="5" x2="12" y2="19"/>
+          <line x1="5" y1="12" x2="19" y2="12"/>
+        </svg>
+        Add new task
+      </button>
+    </section>
+
+    <!-- Calendar View -->
+    <section id="calendar-view" class="view">
+      <div class="calendar-toolbar">
+        <span class="month-label" id="monthLabel">January 2026</span>
+        <div class="calendar-nav">
+          <button class="cal-nav-btn" id="prevMonthBtn" aria-label="Previous month">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polyline points="15 18 9 12 15 6"/>
+            </svg>
+          </button>
+          <button class="cal-nav-btn" id="nextMonthBtn" aria-label="Next month">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polyline points="9 18 15 12 9 6"/>
+            </svg>
+          </button>
+        </div>
+      </div>
+      <div class="calendar-grid" id="calendarGrid">
+        <!-- Calendar will be rendered here -->
+      </div>
+      <!-- Day View Panel (hidden by default) -->
+      <div class="day-view-panel" id="dayViewPanel">
+        <div class="day-view-header">
+          <button class="back-btn" id="backToMonthBtn">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polyline points="15 18 9 12 15 6"/>
+            </svg>
+            Back
+          </button>
+          <span class="selected-date" id="selectedDateLabel">5 January 2026</span>
+          <span class="day-tasks-label">Tasks on this day</span>
+        </div>
+        <div class="day-tasks-list" id="dayTasksList">
+          <!-- Day tasks will be rendered here -->
+        </div>
+        <button class="add-row-btn" id="addDayTaskBtn">
+          <svg class="add-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="12" y1="5" x2="12" y2="19"/>
+            <line x1="5" y1="12" x2="19" y2="12"/>
+          </svg>
+          Add task for this day
+        </button>
+      </div>
+    </section>
+
+    <!-- Notes View -->
+    <section id="notes-view" class="view">
+      <div class="notes-toolbar">
+        <input type="text" class="search-input" id="noteSearchInput" placeholder="Search note">
+        <div class="folder-filter">
+          <svg class="folder-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/>
+          </svg>
+          <select id="folderFilterSelect">
+            <option value="all">All folders</option>
+          </select>
+        </div>
+      </div>
+      <div class="notes-container">
+        <aside class="notes-sidebar">
+          <h3 class="sidebar-title">Notes</h3>
+          <ul class="notes-list" id="notesSidebar">
+            <!-- Notes will be listed here -->
+          </ul>
+          <button class="add-note-btn" id="addNoteBtn">
+            <svg class="add-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <line x1="12" y1="5" x2="12" y2="19"/>
+              <line x1="5" y1="12" x2="19" y2="12"/>
+            </svg>
+            New Note
+          </button>
+        </aside>
+        <div class="notes-main">
+          <!-- List Mode -->
+          <div class="notes-list-view" id="notesListView">
+            <table class="notes-table">
+              <thead>
+                <tr>
+                  <th>Title</th>
+                  <th>Folder</th>
+                </tr>
+              </thead>
+              <tbody id="notesTableBody">
+                <!-- Notes table rows will be rendered here -->
+              </tbody>
+            </table>
+          </div>
+          <!-- Editor Mode -->
+          <div class="notes-editor-view" id="notesEditorView" style="display: none;">
+            <div class="editor-header">
+              <span class="folder-badge" id="editorFolderBadge">Folder: None</span>
+              <button class="close-editor-btn" id="closeEditorBtn">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <line x1="18" y1="6" x2="6" y2="18"/>
+                  <line x1="6" y1="6" x2="18" y2="18"/>
+                </svg>
+              </button>
+            </div>
+            <input type="text" class="editor-title" id="editorTitle" placeholder="Note title">
+            <textarea class="editor-body" id="editorBody" placeholder="Start writing..."></textarea>
+            <div class="editor-footer">
+              <div class="folder-input-group">
+                <label for="editorFolder">Folder:</label>
+                <input type="text" id="editorFolder" placeholder="e.g., Bio, Art, FLL">
+              </div>
+              <button class="save-btn" id="saveNoteBtn">Save</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Board/Whiteboard View -->
+    <section id="board-view" class="view">
+      <div class="board-toolbar">
+        <div class="board-selector">
+          <select id="boardSelect">
+            <option value="">Select a board...</option>
+          </select>
+          <button class="toolbar-btn" id="newBoardBtn" title="New Board">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <line x1="12" y1="5" x2="12" y2="19"/>
+              <line x1="5" y1="12" x2="19" y2="12"/>
+            </svg>
+          </button>
+          <button class="toolbar-btn" id="renameBoardBtn" title="Rename Board">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/>
+              <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/>
+            </svg>
+          </button>
+          <button class="toolbar-btn danger" id="deleteBoardBtn" title="Delete Board">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polyline points="3 6 5 6 21 6"/>
+              <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/>
+            </svg>
+          </button>
+        </div>
+        <h2 class="board-title">Whiteboard</h2>
+        <button class="export-btn" id="exportBoardBtn">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+            <polyline points="7 10 12 15 17 10"/>
+            <line x1="12" y1="15" x2="12" y2="3"/>
+          </svg>
+          Export as image
+        </button>
+      </div>
+      <div class="tools-bar">
+        <button class="tool-btn" data-tool="text" title="Text">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polyline points="4 7 4 4 20 4 20 7"/>
+            <line x1="9" y1="20" x2="15" y2="20"/>
+            <line x1="12" y1="4" x2="12" y2="20"/>
+          </svg>
+          Text
+        </button>
+        <button class="tool-btn" data-tool="sticky" title="Sticky Note">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M15.5 3H5a2 2 0 0 0-2 2v14c0 1.1.9 2 2 2h14a2 2 0 0 0 2-2V8.5L15.5 3Z"/>
+            <path d="M15 3v6h6"/>
+          </svg>
+          Sticky note
+        </button>
+        <button class="tool-btn" data-tool="image" title="Image">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
+            <circle cx="8.5" cy="8.5" r="1.5"/>
+            <polyline points="21 15 16 10 5 21"/>
+          </svg>
+          Image
+        </button>
+        <button class="tool-btn active" data-tool="draw" title="Draw">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M12 19l7-7 3 3-7 7-3-3z"/>
+            <path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"/>
+            <path d="M2 2l7.586 7.586"/>
+            <circle cx="11" cy="11" r="2"/>
+          </svg>
+          Draw
+        </button>
+        <div class="draw-options" id="drawOptions">
+          <input type="color" id="drawColor" value="#071330" title="Drawing color">
+          <input type="range" id="drawWidth" min="1" max="20" value="3" title="Line width">
+        </div>
+      </div>
+      <div class="board-canvas-container" id="boardCanvasContainer">
+        <canvas id="boardCanvas"></canvas>
+        <div class="board-elements" id="boardElements">
+          <!-- Text boxes, sticky notes, images will be placed here -->
+        </div>
+      </div>
+      <input type="file" id="imageUploadInput" accept="image/*" style="display: none;">
+    </section>
+  </main>
+
+  <!-- Modals -->
+  <!-- Task Modal -->
+  <div class="modal-overlay" id="taskModal">
+    <div class="modal">
+      <div class="modal-header">
+        <h3 id="taskModalTitle">New Task</h3>
+        <button class="modal-close" id="closeTaskModal">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <label for="taskTitleInput">Task title</label>
+          <input type="text" id="taskTitleInput" placeholder="Enter task title">
+        </div>
+        <div class="form-group">
+          <label for="taskCategorySelect">Category</label>
+          <select id="taskCategorySelect">
+            <option value="School">School</option>
+            <option value="Personal">Personal</option>
+            <option value="Other">Other</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="taskDueDateInput">Due date (optional)</label>
+          <input type="date" id="taskDueDateInput">
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="cancel-btn" id="cancelTaskBtn">Cancel</button>
+        <button class="submit-btn" id="submitTaskBtn">Save Task</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Day Task Modal -->
+  <div class="modal-overlay" id="dayTaskModal">
+    <div class="modal">
+      <div class="modal-header">
+        <h3 id="dayTaskModalTitle">New Task</h3>
+        <button class="modal-close" id="closeDayTaskModal">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <label for="dayTaskTextInput">Task</label>
+          <input type="text" id="dayTaskTextInput" placeholder="Enter task">
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="cancel-btn" id="cancelDayTaskBtn">Cancel</button>
+        <button class="submit-btn" id="submitDayTaskBtn">Save</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Note Modal -->
+  <div class="modal-overlay" id="noteModal">
+    <div class="modal">
+      <div class="modal-header">
+        <h3>New Note</h3>
+        <button class="modal-close" id="closeNoteModal">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <label for="noteTitleInput">Title</label>
+          <input type="text" id="noteTitleInput" placeholder="Enter note title">
+        </div>
+        <div class="form-group">
+          <label for="noteBodyInput">Body</label>
+          <textarea id="noteBodyInput" placeholder="Note content..." rows="4"></textarea>
+        </div>
+        <div class="form-group">
+          <label for="noteFolderInput">Folder (optional)</label>
+          <input type="text" id="noteFolderInput" placeholder="e.g., Bio, Art, FLL">
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="cancel-btn" id="cancelNoteBtn">Cancel</button>
+        <button class="submit-btn" id="submitNoteBtn">Save Note</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Board Name Modal -->
+  <div class="modal-overlay" id="boardNameModal">
+    <div class="modal">
+      <div class="modal-header">
+        <h3 id="boardNameModalTitle">New Board</h3>
+        <button class="modal-close" id="closeBoardNameModal">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <label for="boardNameInput">Board name</label>
+          <input type="text" id="boardNameInput" placeholder="e.g., Art project">
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="cancel-btn" id="cancelBoardNameBtn">Cancel</button>
+        <button class="submit-btn" id="submitBoardNameBtn">Save</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Confirm Delete Modal -->
+  <div class="modal-overlay" id="confirmModal">
+    <div class="modal">
+      <div class="modal-header">
+        <h3>Confirm</h3>
+        <button class="modal-close" id="closeConfirmModal">&times;</button>
+      </div>
+      <div class="modal-body">
+        <p id="confirmMessage">Are you sure?</p>
+      </div>
+      <div class="modal-footer">
+        <button class="cancel-btn" id="cancelConfirmBtn">Cancel</button>
+        <button class="submit-btn danger" id="confirmBtn">Delete</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Customisation Modal -->
+  <div class="modal-overlay" id="customiseModal">
+    <div class="modal">
+      <div class="modal-header">
+        <h3>Customisation</h3>
+        <button class="modal-close" id="closeCustomiseModal">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <label>Font size</label>
+          <div class="radio-group">
+            <label class="radio-label">
+              <input type="radio" name="fontSize" value="normal" checked> Normal
+            </label>
+            <label class="radio-label">
+              <input type="radio" name="fontSize" value="large"> Large
+            </label>
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Accent color</label>
+          <div class="color-options">
+            <button class="color-option selected" data-color="#083b69" style="background-color: #083b69;"></button>
+            <button class="color-option" data-color="#0c4160" style="background-color: #0c4160;"></button>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="submit-btn" id="saveCustomiseBtn">Save</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Tutorial Modal -->
+  <div class="modal-overlay" id="tutorialModal">
+    <div class="modal modal-lg">
+      <div class="modal-header">
+        <h3>Tutorial</h3>
+        <button class="modal-close" id="closeTutorialModal">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div class="tutorial-section">
+          <h4>🏠 Home</h4>
+          <p>Your dashboard showing pending tasks, notes count, and last opened board. Quick access to create new tasks and notes.</p>
+        </div>
+        <div class="tutorial-section">
+          <h4>✓ To-do</h4>
+          <p>Manage your tasks with categories (School, Personal, Other). Set due dates and mark tasks as complete. Click a task to edit or delete it.</p>
+        </div>
+        <div class="tutorial-section">
+          <h4>📅 Calendar</h4>
+          <p>View your month and click any day to add tasks specific to that date. Navigate between months using the arrows.</p>
+        </div>
+        <div class="tutorial-section">
+          <h4>📝 Notes</h4>
+          <p>Create and organize notes into folders. Use the search bar to find notes quickly. Click any note to edit it.</p>
+        </div>
+        <div class="tutorial-section">
+          <h4>🎨 Board</h4>
+          <p>A digital whiteboard for drawing, adding text, sticky notes, and images. Create multiple boards and export them as PNG images.</p>
+        </div>
+        <div class="tutorial-section">
+          <h4>💾 Data Storage</h4>
+          <p>All your data is saved locally on this device using localStorage. No account or internet required!</p>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="submit-btn" id="gotItBtn">Got it!</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Task Context Menu -->
+  <div class="context-menu" id="taskContextMenu">
+    <button class="context-item" id="editTaskBtn">Edit task</button>
+    <button class="context-item danger" id="deleteTaskBtn">Delete task</button>
+  </div>
+
+  <!-- Scripts -->
+  <script src="js/storage.js"></script>
+  <script src="js/todo.js"></script>
+  <script src="js/calendar.js"></script>
+  <script src="js/notes.js"></script>
+  <script src="js/board.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>
