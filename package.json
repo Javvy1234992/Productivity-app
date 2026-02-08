@@ -1,0 +1,11 @@
+{
+  "name": "studentflow-productivity",
+  "version": "1.0.0",
+  "description": "Offline productivity app for students (14-18)",
+  "scripts": {
+    "dev": "npx live-server --port=3000 --no-browser",
+    "start": "npx live-server --port=3000"
+  },
+  "keywords": ["productivity", "student", "offline", "pwa"],
+  "license": "MIT"
+}
